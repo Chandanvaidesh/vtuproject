@@ -1,0 +1,76 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Live Attention & Emotion Tracker</title>
+
+  <!-- face-api.js -->
+  <script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+
+  <!-- Chart.js -->
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Model path -->
+  <script>
+    const MODEL_URL = './models';
+  </script>
+
+  <style>
+    body { margin: 0; overflow: hidden; }
+
+    /* Fullscreen video & overlay */
+    video, canvas#overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    /* Download button above video */
+    button {
+      position: absolute;
+      top: 10px; right: 10px;
+      z-index: 50;
+      padding: 8px 12px;
+      font-size: 14px;
+    }
+
+    /* Charts container forced above everything */
+    .charts {
+      position: absolute;
+      bottom: 10px; left: 10px;
+      z-index: 100;
+      background: rgba(0,0,0,0.8);
+      padding: 10px;
+      border-radius: 8px;
+      max-width: 320px;
+    }
+
+    /* Make canvases visible */
+    .charts canvas {
+      display: block;
+      width: 300px;
+      height: 150px;
+      background: #fff;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <video id="video" autoplay muted playsinline></video>
+  <canvas id="overlay"></canvas>
+
+  <button onclick="downloadLog()">Download Log</button>
+
+  <div class="charts">
+    <canvas id="attentionChart"></canvas>
+    <canvas id="emotionChart"></canvas>
+  </div>
+
+  <script defer src="script.js"></script>
+</body>
+</html>
